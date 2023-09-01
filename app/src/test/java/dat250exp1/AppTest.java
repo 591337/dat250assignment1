@@ -5,10 +5,20 @@ package dat250exp1;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
 
 class AppTest {
-    @Test void appHasAGreeting() {
-        App classUnderTest = new App();
-        assertNotNull(classUnderTest.getGreeting(), "app should have a greeting");
+    @Test void converterTest() {
+        assertThat(Converter.convert(1d, "in", "in"), is(1d));
+
+        assertThat(Converter.convert(1d, "in", "hei"), is(Double.NaN));
+
+        assertThat(Converter.convert(1d, "hei", "in"), is(Double.NaN));
+
+        double result = Converter.convert(1d, "in", "m");
+        assertThat(result, is(not(Double.NaN)));
+        assertThat(result, is(not(1d)));
+
     }
 }
